@@ -36,14 +36,11 @@ def save_suppliers():
                 if len(supplier) == 0:
                     print(data['name']) 
                     cur.execute('Insert Into "Suppliers" ("Name","Contact_Phone","Contact_Name","Address","Remarks","Created_At","Updated_At") values (%s,%s,%s,%s,%s,%s,%s)',([data['name'],data['contact_phone'],data['contact_name'],data['address'],data['remarks'],data['createdAt'],data['updatedAt']]))
-                    
-                    # if insert == None:
-                    #         print("Added " + data[1])
-                    # else:
-                    #     for d_prod in prodt:
-                    #         customers_id = d_prod['id']
-                    #     print(data[1] + " port_id not added")
-                    conn.commit()
+                    print("Added to Ports " + data['name'])
+                else:
+                    len(supplier) == True
+                print("Suppllier Exists")
+                conn.commit()
                 # print(list['name'])
                 
                 

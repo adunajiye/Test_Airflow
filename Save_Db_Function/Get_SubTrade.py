@@ -19,26 +19,26 @@ def save_subtrade():
         # Pull data from Dodois
         subtrade_object = requests.get("http://159.65.21.91:3000/sub-trade")
         subtrade_object = subtrade_object.json()
-        # return subtrade_object
+        # print(subtrade_object)
             
         for data in subtrade_object['data']:
             subtrade_list = data
-            print(subtrade_list)
+            # print(subtrade_list)
             """
             Loop Through data list and pass neccessary Info
             """
-            for list in data:
-                cur.execute('SELECT * from "SubTrade" where "Id" = %s',[data['id']])
-                subt = cur.fetchall()
-                # print(subt)
-                if len(subt) == 0:
-                    print(data['sourcingStatus'])
-                    cur.execute('Insert Into "SubTrade" ("Cost","Expenses_Amount","SourceTrading","Created_At","Updated_At","Remarks","Comments","ForeignCurrency","Quantity") values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',(data['cost'],data['expenses']['amount'],data['sourcingStatus'],data['createdAt'],data['updatedAt'],data['remarks'],data['amountInForeignCurrency'],[data['quantity']]))
-                    conn.commit()
-                    print("Added to SubTrade" + data['quantity'])
-                else:
-                    len(subt) == True
-                print("SubTrade Exists")
+            # for list in subtrade_list:
+            cur.execute('SELECT * from "SubTrade" where "Id" = %s',[data['id']])
+            subt = cur.fetchall()
+            # print(subt)
+            if len(subt) == 0:
+                print(data['sourcingStatus'])
+                # cur.execute('Insert Into "SubTrade" ("Cost","Expenses_Amount","SourceTrading","Created_At","Updated_At","Remarks","Comments","ForeignCurrency","Quantity") values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',(data['cost'],data['expenses']['amount'],str(data['sourcingStatus']),data['createdAt'],data['updatedAt'],str(data['expenses']['remarks']),str(data['expenses']['comments']),data['expenses']['amountInForeignCurrency'],data['quantity']))
+                conn.commit()
+            #     print("Added to SubTrade" + data['quantity'])
+            # else:
+            #     len(subt) == True
+            # print("SubTrade Exists")
                 
                 
             # close the communication with the PostgreSQL
