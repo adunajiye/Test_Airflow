@@ -4,7 +4,7 @@ from datetime import datetime
 from airflow.models import Variable
 from Save_Db_Function.Get_ProducType import save_productype
 
-with DAG("Getsubtrade_Data", start_date=datetime(2023, 11, 30),
+with DAG("GetProduct_Type_Data", start_date=datetime(2023, 11, 30),
 schedule_interval='@daily', max_active_runs=1, catchup=False) as dag:
 
     Tstc_script_A = PythonOperator(
