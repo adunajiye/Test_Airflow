@@ -20,32 +20,38 @@ def save_subtrade():
         subtrade_object = requests.get("http://159.65.21.91:3000/sub-trade")
         subtrade_object = subtrade_object.json()
         # print(subtrade_object)
-            
+        """
+         Loop Through data list and pass neccessary Info
+        """
         for data in subtrade_object['data']:
-            subtrade_list = data
-            # print(subtrade_list)
-            """
-            Loop Through data list and pass neccessary Info
-            """
-            # for list in subtrade_list:
-            cur.execute('SELECT * from "SubTrade" where "Id" = %s',[data['id']])
+            subtrade_List = data
+            count = 1
+           
+            # Assuming data is a dictionary, not a list
+            cur.execute('SELECT * from "SubTrade" where "Id" = %s', [data['id']])
             subt = cur.fetchall()
-            # print(subt)
+            for comments in data['comments']:
+                print(comments['comment'])
+                
             if len(subt) == 0:
-                print(data['sourcingStatus'])
-                # cur.execute('Insert Into "SubTrade" ("Cost","Expenses_Amount","SourceTrading","Created_At","Updated_At","Remarks","Comments","ForeignCurrency","Quantity") values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',(data['cost'],data['expenses']['amount'],str(data['sourcingStatus']),data['createdAt'],data['updatedAt'],str(data['expenses']['remarks']),str(data['expenses']['comments']),data['expenses']['amountInForeignCurrency'],data['quantity']))
+                for expenses_item in data['expenses']:
+                    print(expenses_item['amount'])
+                    # print(expenses_item['amountInForeignCurrency'])
+                    # print(expenses_item['remarks'])
+                    cur.execute('Insert Into "SubTrade" ("Cost","Expenses_Amount","SourceTrading","Created_At","Updated_At","Remarks","Comments","ForeignCurrnecy","Quantity") values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                                (data['cost'],expenses_item['amount'],data['sourcingStatus'],data['createdAt'],data['updatedAt'],expenses_item['remarks'],comments['comment'],expenses_item['amountInForeignCurrency'],data['quantity']))
                 conn.commit()
-            #     print("Added to SubTrade" + data['quantity'])
-            # else:
-            #     len(subt) == True
-            # print("SubTrade Exists")
+                print("Added to SubTrade" + data['quantity'])
+            else:
+                len(subt) == True
+            print("SubTrade Exists")
                 
                 
             # close the communication with the PostgreSQL
         cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        print(f"Error during INSERT: {error}")
     finally:
         if conn is not None:
             conn.close()
