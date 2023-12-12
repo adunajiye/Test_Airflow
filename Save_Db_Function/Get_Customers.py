@@ -36,17 +36,11 @@ def save_customers():
                     print(data['name']) 
                     cur.execute('Insert Into "Customers" ("Name", "Location","Customer_Id","Contact_Information","Docs_Required","Created_at","Updated_at") values (%s,%s,%s,%s,%s,%s,%s)',([data['name'],str(data['location']),data['customerId'],data['contactInformation'],data['docsRequired'],data['createdAt'],data['updatedAt']]))
                     conn.commit()
-                    print("Added to Customers " +data['name'])
-                else:
-                    len(customers) == True
-                print("Customer_Names Exists")
+                    
                 
-                
-                
-                
-                        
+            
             # close the communication with the PostgreSQL
-        cur.close()
+                    cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
