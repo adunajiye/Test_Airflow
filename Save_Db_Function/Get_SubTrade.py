@@ -41,17 +41,12 @@ def save_subtrade():
                     cur.execute('Insert Into "SubTrade" ("Cost","Expenses_Amount","SourceTrading","Created_At","Updated_At","Remarks","Comments","ForeignCurrnecy","Quantity") values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
                                 (data['cost'],expenses_item['amount'],data['sourcingStatus'],data['createdAt'],data['updatedAt'],expenses_item['remarks'],comments['comment'],expenses_item['amountInForeignCurrency'],data['quantity']))
                 conn.commit()
-                print("Added to SubTrade" + data['quantity'])
-            else:
-                len(subt) == True
-            print("SubTrade Exists")
-                
                 
             # close the communication with the PostgreSQL
         cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
-        print(f"Error during INSERT: {error}")
+        print(error)
     finally:
         if conn is not None:
             conn.close()

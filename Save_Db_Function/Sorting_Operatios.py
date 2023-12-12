@@ -36,7 +36,7 @@ def save_sorts_operations():
             """
             Loop Through data list and pass neccessary Info
             """
-            for list in sort_op_list_safari:
+            for list in data:
                 cur.execute('SELECT * from "SortingOperations" where "Id" = %s',[data['id']])
                 sorts_op_safari = cur.fetchall()
                 if len(sorts_op_safari) == 0:
@@ -51,9 +51,6 @@ def save_sorts_operations():
                     print(data['name']) 
                     cur.execute('Insert Into "SortingOperations" ("Sorting_Id","Date","Currency","Company_Name","Exchange_Rate", "Created_At","Updated_At","Quantity_Sorted","Amount_Paid","Amount_Paid_USD") values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',([data['sortingId'],data['date'],data['currency'],data['company'],data['exchnageRate'],data['createdAt'],data['updatedAt'],data['quantitySorted'],data['amountPaid'],data['amountPaidInUsd']]))
                     print("Added Ployforte to SortingOpearations " + data['name'])
-                else:
-                    len(sorts_op) == True
-                print("Sorters_Operations Exists")
             conn.commit()    
             # close the communication with the PostgreSQL
         cur.close()
