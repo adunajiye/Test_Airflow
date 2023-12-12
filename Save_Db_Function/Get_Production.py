@@ -36,17 +36,11 @@ def save_production():
                     print(data['name']) 
                     cur.execute('Insert Into "Production" ("Production_Id", "Date","Product_Type","Quantiy_Before_Prod","Quantiy_After_Prod","Created_At","Updated_At","Comments","Production_Type") values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',([data['productionId'],data['date'],data['productType'],data['quantityBeforeProduction'],data['quantityAfterProduction'],data['createdAt'],data['updatedAt'],data['comments']['comment'],data['comments']['type']]))
                     print("Added to Production " + data['productionId'])
-                else:
-                    len(sorts) == True
-                print("Production Exists")
             conn.commit()    
             # close the communication with the PostgreSQL
         cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_production()

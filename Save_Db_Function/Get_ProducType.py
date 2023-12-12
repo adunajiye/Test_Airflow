@@ -37,9 +37,6 @@ def save_productype():
                     cur.execute('Insert Into "Product_Type" ("Name","Created_At","Updated_At") values (%s,%s,%s)',([data['name'],data['createdAt'],data['updatedAt']]))
                     conn.commit()
                     print("Added to Products " +data['name'])
-                else:
-                    len(prodt) == True
-                print("Product_Type Exists")
                 # print(list['name'])
                 
                 
@@ -50,8 +47,5 @@ def save_productype():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_productype()

@@ -36,17 +36,11 @@ def save_sorts():
                     print(data['name']) 
                     cur.execute('Insert Into "Sorters" ("Customer_Name", "Comapny_Name","Created_At","Updated_At") values (%s,%s,%s,%s)',([data['name'],str(data['company']),data['createdAt'],data['updatedAt']]))
                     print("Added to Sorters " + data['name'])
-                else:
-                    len(sorts) == True
-                print("Sorters Exists")
                 conn.commit()    
             # close the communication with the PostgreSQL
         cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_sorts()

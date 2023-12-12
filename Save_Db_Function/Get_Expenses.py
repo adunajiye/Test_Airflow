@@ -5,7 +5,7 @@ import psycopg2
 import datetime
 
 
-def save_expensetype():
+def save_expense():
     print('Connecting to the PostgreSQL database...')
     try:
         conn = psycopg2.connect(
@@ -47,8 +47,6 @@ def save_expensetype():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
-save_expensetype()
+    
+        print('Database connection closed.')
+save_expense()

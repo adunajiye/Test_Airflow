@@ -5,7 +5,7 @@ import psycopg2
 import datetime
 
 
-def save_shipments():
+def save_subshipments():
     print('Connecting to the PostgreSQL database...')
     try:
         conn = psycopg2.connect(
@@ -59,4 +59,4 @@ def save_shipments():
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
         print('Database connection closed.')
-save_shipments()
+save_subshipments()

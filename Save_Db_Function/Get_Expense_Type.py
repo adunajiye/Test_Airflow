@@ -38,17 +38,11 @@ def save_expensetype():
                     cur.execute('Insert Into "Expenses_Type" ("Name","Created_At","Updated_At") values (%s,%s,%s)',([data['name'],data['createdAt'],data['updatedAt']]))
                     conn.commit()
                     print("Added to Expense_Type_db " +data['name'])
-                else:
-                    len(prod) == True
-                print("Expenses_Type Exists")     
                       
             # close the communication with the PostgreSQL
         cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_expensetype()

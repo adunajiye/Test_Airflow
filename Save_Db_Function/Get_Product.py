@@ -37,9 +37,6 @@ def save_products():
                     print(data['name']) 
                     cur.execute('Insert Into "Products" ("Name","Product_Id","Created_At","Updated_At") values (%s,%s,%s,%s)',([data['name'],data['productId'],data['createdAt'],data['updatedAt']]))
                     print("Added to Products " +data['name'])
-                else:
-                    len(prod) == True
-                print("Products Exists")
                     
                 conn.commit()                        
             # close the communication with the PostgreSQL
@@ -47,8 +44,6 @@ def save_products():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+    
+        print('Database connection closed.')
 save_products()

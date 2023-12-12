@@ -57,8 +57,5 @@ def save_sorts_operations():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_sorts_operations()

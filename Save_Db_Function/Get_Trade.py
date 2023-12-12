@@ -34,17 +34,13 @@ def save_trade():
                 cur.execute('SELECT * from "Trade" where "Id" = %s',[data['id']])
                 trd = cur.fetchall()
                 if len(trd) == 0:
-                    # print(data['tradeId']) 
+                    print(data['tradeId'])
                     # ...
                     cur.execute('INSERT INTO "Trade" ("Start_Date", "End_Date", "Status", "Quantity", "Quantity_Sourced", "Quantity_Loaded", "Price_Per_Ton", "Trade_Currency", "Trade_Cost_Per_Ton", "Trade_Window", "Total_Product_Sales", "Trade_Balance", "Trade_Deposit", "Cureent_Trade_Profit", "Estimatted_Trade_Profit", "Customer_Name", "Customer_Location","Trade_Id") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                                 (data['startDate'], data['endDate'], str(data['status']), data['quantity'], data['quantitySourced'], data['quantityLoaded'], data['financials']['pricePerTon'], str(data['financials']['currency']), data['financials']['tradeCostPerTon'], data['financials']['tradeWindow'], data['financials']['totalProductSales'], data['financials']['tradeBalance'], data['financials']['tradeDeposit'], data['financials']['currentTradeProfit'], data['financials']['estimatedTradeProfit'], str(data['customerName']), str(data['destinationPort']['location']),data['tradeId']))
                     conn.commit()
                     # print("Added to Trade " +data['customerName'])
-                if len(trd) == True:
-                    print("Trade_Summary Exists")
-                else:
-                    len(trd) == False
-                    print("Trade_Summary added" + data['customerName'])
+
                     
                     
                     
@@ -57,8 +53,5 @@ def save_trade():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_trade()

@@ -37,9 +37,7 @@ def save_suppliers():
                     print(data['name']) 
                     cur.execute('Insert Into "Suppliers" ("Name","Contact_Phone","Contact_Name","Address","Remarks","Created_At","Updated_At") values (%s,%s,%s,%s,%s,%s,%s)',([data['name'],data['contact_phone'],data['contact_name'],data['address'],data['remarks'],data['createdAt'],data['updatedAt']]))
                     print("Added to Ports " + data['name'])
-                else:
-                    len(supplier) == True
-                print("Suppllier Exists")
+                
                 conn.commit()
                 # print(list['name'])
                 
@@ -51,8 +49,5 @@ def save_suppliers():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_suppliers()

@@ -36,17 +36,12 @@ def save_sorts_summary():
                     print(data['name']) 
                     cur.execute('Insert Into "Summary_Sortings" ("Quantity_Sourced", "Amount_Paid","Amount_Paid_USD","Company_Name","Created_At","Updated_At","Sorters_Quanity_Sorted") values (%s,%s,%s,%s,%s,%s)',([data['quantitySorted'],data['amountPaid'],data['amountPaidInUsd'],data['company'],data['createdAt'],data['updatedAt']]))
                     print("Added to Summary_Sortings " + data['name'])
-                else:
-                    len(sorts) == True
-                print("Sorters_Summary Exists")
+                
             conn.commit()    
             # close the communication with the PostgreSQL
         cur.close()
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
+        print('Database connection closed.')
 save_sorts_summary()
