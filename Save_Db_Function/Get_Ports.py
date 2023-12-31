@@ -16,10 +16,13 @@ def save_ports():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        port_object = requests.get("http://159.65.21.91:3000/port")
-        port_object = port_object.json()
-        print(port_object)
+        # Pull data from Ports
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        ports_url = "https://vm-backend-ane5.onrender.com/port"
+        res_ = requests.request("GET",ports_url, headers=headers, data=payload)
+        port_object = res_.json()
+        # print(port_object)
             
             
         for data in port_object['data']:

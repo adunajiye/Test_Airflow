@@ -3,6 +3,7 @@ import requests
 from pprint import pprint
 import psycopg2
 import datetime
+# from Save_Db_Function.Login import Login
 
 
 def save_customers():
@@ -16,9 +17,14 @@ def save_customers():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        res_object = requests.get("http://159.65.21.91:3000/customer")
-        res_object = res_object.json()
+        
+        # Pull data from Customers
+        # session_id = Login()
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        customer_url = "https://vm-backend-ane5.onrender.com/customer"
+        res_ = requests.request("GET",customer_url, headers=headers, data=payload)
+        res_object = res_.json()
         # print(res_object)
             
             

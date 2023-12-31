@@ -16,10 +16,13 @@ def save_products():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        prod_object = requests.get("http://159.65.21.91:3000/product")
-        prod_object = prod_object.json()
-        print(prod_object)
+        # Pull data from Products
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        ports_url = "https://vm-backend-ane5.onrender.com/product"
+        res_ = requests.request("GET",ports_url, headers=headers, data=payload)
+        prod_object = res_.json()
+        # print(prod_object)
             
             
         for data in prod_object['data']:

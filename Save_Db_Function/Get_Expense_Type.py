@@ -17,8 +17,11 @@ def save_expensetype():
         )
         cur = conn.cursor() 
         # Pull data from Dodois
-        expense_object = requests.get("http://159.65.21.91:3000/expense-type")
-        expense_object = expense_object.json()
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        expense_type_url = "https://vm-backend-ane5.onrender.com/expense-type"
+        res_ = requests.request("GET",expense_type_url, headers=headers, data=payload)
+        expense_object = res_.json()
         # print(expense_object)
             
             

@@ -16,10 +16,13 @@ def save_inventory():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        Inv_object = requests.get("https://vm-backend-ane5.onrender.com/inventory")
-        Inv_object  = Inv_object .json()
-        print(Inv_object)
+        # Pull data from Inventory
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        inventory_url = "https://vm-backend-ane5.onrender.com/inventory"
+        res_ = requests.request("GET",inventory_url, headers=headers, data=payload)
+        Inv_object = res_.json()
+        # print(Inv_object)
             
             
         for data in Inv_object['data']:

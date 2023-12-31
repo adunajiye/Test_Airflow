@@ -16,10 +16,13 @@ def save_production():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        Production_object = requests.get("https://vm-backend-ane5.onrender.com/production")
-        Production_object  = Production_object .json()
-        print(Production_object)
+        # Pull data from Production APIs
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        ports_url = "https://vm-backend-ane5.onrender.com/production"
+        res_ = requests.request("GET",ports_url, headers=headers, data=payload)
+        Production_object = res_.json()
+        # print(Production_object)
             
             
         for data in Production_object['data']:

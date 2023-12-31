@@ -17,7 +17,7 @@ def save_expense():
         )
         cur = conn.cursor() 
         # Pull data from Dodois
-        expense_object = requests.get("http://159.65.21.91:3000/expense")
+        expense_object = requests.get("https://vm-backend-ane5.onrender.com/expense")
         expense_object = expense_object.json()
         print(expense_object)
             
