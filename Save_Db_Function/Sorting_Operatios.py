@@ -16,14 +16,18 @@ def save_sorts_operations():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        sort_op_object_poly = requests.get("https://vm-backend-ane5.onrender.com/sorting-operation?company=Polyforte")
-        sort_op_object_poly = sort_op_object_poly.json()
-        print(sort_op_object_poly)
-        
-        sort_op_object_safari = requests.get("https://vm-backend-ane5.onrender.com/sorting-operation?company=Safari Polymers")
-        sort_op_object_safari = sort_op_object_safari.json()
-        print(sort_op_object_safari)
+        # Pull data from Sorting Opeartions APIs
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        polyforte_url = "https://vm-backend-ane5.onrender.com/sorting-operation?company=Polyforte"
+        res_ = requests.request("GET",polyforte_url, headers=headers, data=payload)
+        sort_op_object_poly= res_.json()
+        # print(sort_op_object_poly)
+
+        safari_url = "https://vm-backend-ane5.onrender.com/sorting-operation?company=Safari Polymers"
+        res_ = requests.request("GET",safari_url, headers=headers, data=payload)
+        sort_op_object_safari = res_.json()
+        # print(sort_op_object_safari)
 
         for data in sort_op_object_safari['data']:
             sort_op_list_safari = data

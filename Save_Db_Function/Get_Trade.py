@@ -16,9 +16,12 @@ def save_trade():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        trade_object = requests.get("http://159.65.21.91:3000/trade")
-        trade_object = trade_object.json()
+        # Pull data from Trade APIs
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        trade_url = "https://vm-backend-ane5.onrender.com/trade"
+        res_ = requests.request("GET",trade_url, headers=headers, data=payload)
+        trade_object = res_.json()
         # print(trade_object)
             
             
@@ -40,14 +43,7 @@ def save_trade():
                                 (data['startDate'], data['endDate'], str(data['status']), data['quantity'], data['quantitySourced'], data['quantityLoaded'], data['financials']['pricePerTon'], str(data['financials']['currency']), data['financials']['tradeCostPerTon'], data['financials']['tradeWindow'], data['financials']['totalProductSales'], data['financials']['tradeBalance'], data['financials']['tradeDeposit'], data['financials']['currentTradeProfit'], data['financials']['estimatedTradeProfit'], str(data['customerName']), str(data['destinationPort']['location']),data['tradeId']))
                     conn.commit()
                     # print("Added to Trade " +data['customerName'])
-
-                    
-                    
-                    
-                
-                
-                
-                        
+   
             # close the communication with the PostgreSQL
         cur.close()
 

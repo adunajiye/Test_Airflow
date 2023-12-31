@@ -16,9 +16,12 @@ def save_subtrade():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        subtrade_object = requests.get("http://159.65.21.91:3000/sub-trade")
-        subtrade_object = subtrade_object.json()
+        # Pull data from SubTrade
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        ports_url = "https://vm-backend-ane5.onrender.com/sub-trade"
+        res_ = requests.request("GET",ports_url, headers=headers, data=payload)
+        subtrade_object = res_.json()
         # print(subtrade_object)
         """
          Loop Through data list and pass neccessary Info

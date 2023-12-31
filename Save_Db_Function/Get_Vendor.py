@@ -16,10 +16,13 @@ def save_vendor():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        Vendor_object = requests.get("https://vm-backend-ane5.onrender.com/vendor")
-        Vendor_object  = Vendor_object .json()
-        print(Vendor_object)
+        # Pull data from Vendor APIs
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        vendor_url = "https://vm-backend-ane5.onrender.com/vendor"
+        res_ = requests.request("GET",vendor_url, headers=headers, data=payload)
+        Vendor_object = res_.json()
+        # print(Vendor_object)
             
             
         for data in Vendor_object['data']:

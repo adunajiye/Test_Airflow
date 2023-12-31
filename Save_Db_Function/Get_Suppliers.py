@@ -16,10 +16,13 @@ def save_suppliers():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        supp_object = requests.get("http://159.65.21.91:3000/supplier")
-        supp_object = supp_object.json()
-        print(supp_object)
+        # Pull data from Suppliers APIs
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        suppliers_url = "https://vm-backend-ane5.onrender.com/supplier"
+        res_ = requests.request("GET",suppliers_url, headers=headers, data=payload)
+        supp_object = res_.json()
+        # print(supp_object)
             
             
         for data in supp_object['data']:
@@ -40,9 +43,6 @@ def save_suppliers():
                 
                 conn.commit()
                 # print(list['name'])
-                
-                
-                
                         
             # close the communication with the PostgreSQL
         cur.close()

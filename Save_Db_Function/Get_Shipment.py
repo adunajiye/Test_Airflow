@@ -16,14 +16,20 @@ def save_shipments():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        ship_op_object_poly = requests.get("https://vm-backend-ane5.onrender.com/shipment?company=Polyforte")
-        ship_op_object_poly = ship_op_object_poly.json()
-        print(ship_op_object_poly)
+        # Pull data from Polymforte
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        polyforte_url = "https://vm-backend-ane5.onrender.com/shipment?company=Polyforte"
+        res_ = requests.request("GET",polyforte_url, headers=headers, data=payload)
+        ship_op_object_poly = res_.json()
+        # print(ship_op_object_poly)
+
         
-        ship_op_object_safari = requests.get("https://vm-backend-ane5.onrender.com/shipment?company=Safari Polymers")
-        ship_op_object_safari = ship_op_object_safari.json()
-        print(ship_op_object_safari)
+        Safari_Polymers_url = "https://vm-backend-ane5.onrender.com/shipment?company=Safari Polymers"
+        res_ = requests.request("GET",Safari_Polymers_url, headers=headers, data=payload)
+        ship_op_object_safari = res_.json()
+        # print(ship_op_object_safari)
+    
 
         for data in ship_op_object_safari['data']:
             ship_op_list_safari = data

@@ -16,10 +16,13 @@ def save_sorts_summary():
             port=25060
         )
         cur = conn.cursor() 
-        # Pull data from Dodois
-        sort_object = requests.get("https://vm-backend-ane5.onrender.com/sorting")
-        sort_object = sort_object.json()
-        print(sort_object)
+        # Pull data from Sortings
+        payload = {}
+        headers = { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkdW5haml5ZUBnbWFpbC5jb20iLCJzdWIiOjMsImlhdCI6MTcwNDAxMTE5OSwiZXhwIjoxNzA2NjAzMTk5fQ.02RS6sqOLk8-cpZXmQeqF6fnojcXBnpTh92Rb4BpE9A'}
+        sorting_url = "https://vm-backend-ane5.onrender.com/sorting"
+        res_ = requests.request("GET",sorting_url, headers=headers, data=payload)
+        sort_object = res_.json()
+        # print(sort_object)
             
             
         for data in sort_object['data']:

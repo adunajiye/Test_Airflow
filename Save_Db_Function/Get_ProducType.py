@@ -22,7 +22,7 @@ def save_productype():
         prodt_url = "https://vm-backend-ane5.onrender.com/product-type"
         res_ = requests.request("GET",prodt_url, headers=headers, data=payload)
         prodt_object = res_.json()
-        print(prodt_object)
+        # print(prodt_object)
             
             
         # for data in prodt_object['data']:
